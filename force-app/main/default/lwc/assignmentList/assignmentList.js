@@ -70,6 +70,7 @@ export default class AssignmentList extends LightningElement {
         this.pagination();
        }
         else{
+            this.totalPages = 1;
             this.assignmentData = this.records;  
         }
     }
@@ -94,16 +95,19 @@ export default class AssignmentList extends LightningElement {
         if(this.searchTitle == null || this.searchTitle == ''){
             console.log('null title');
             this.records = this.allData;
+            this.totalRecords = this.records.length;
             this.pagination();
         }
     }
     handleSearch(event){
        let filteredData = this.records.filter(rec => rec.Title__c.includes(this.searchTitle));
         this.records = filteredData;
+        this.totalRecords = this.records.length;
          if(this.records.length > this.pageSize){
             this.pagination();
            }
             else{
+                 this.totalPages = 1;
                 this.assignmentData = this.records;  
             }
       // this.pagination();        
