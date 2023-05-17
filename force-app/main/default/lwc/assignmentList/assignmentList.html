@@ -1,0 +1,50 @@
+<template>
+    <lightning-card title="Assignment List">
+        <div class="slds-p-around_x-small slds-grid slds-grid_align-end">
+            <div class="slds-p-right_xx-small">
+                <button class="slds-button slds-button_icon slds-button_icon-border " title="Refresh"  onclick={refreshTimeline}>
+                    <svg class="slds-button__icon" aria-hidden="true">
+                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.28.0#refresh"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="slds-col slds-p-right_xx-small">
+                <span style="padding-right: 20px">
+                    <lightning-input
+                        variant="label-hidden"
+                        placeholder="Search Title"
+                        type="search"
+                        value={searchTitle}
+                        onchange={searchTitleChange}></lightning-input>
+                </span>
+            </div>
+            <div class="slds-col">
+                <span>
+                    <lightning-button
+                        label="Search"
+                        variant="neutral"
+                        onclick={handleSearch} ></lightning-button>
+                </span>
+            </div>
+        </div>
+        <lightning-datatable
+                    key-field="Id"
+                    data={assignmentData}
+                    columns={columns}
+                    hide-checkbox-column 
+                    min-column-width="150"
+                    sorted-by={sortBy}
+                    sorted-direction={sortDirection}
+                    onsave={handleSave}
+                    draft-values={saveDraftValues} 
+                    onsort={handleSortData}>
+        </lightning-datatable>
+        <div class="slds-align_absolute-center" style="height:5rem">
+            <lightning-button disabled={disablePrev} icon-name="utility:chevronleft" label="Previous" alternative-text="Previous" onclick={previousPage} icon-position="left"></lightning-button>
+            &nbsp;
+            <span class="slds-badge">Page No : {pageNumber} &nbsp;&nbsp;Total Records : {totalRecords} </span>
+            &nbsp;
+            <lightning-button disabled={disableNext} icon-name="utility:chevronright" label="Next" alternative-text="Next" onclick={nextPage} class="slds-p-horizontal_x-small" icon-position="right"></lightning-button>
+        </div>
+    </lightning-card>
+</template>
