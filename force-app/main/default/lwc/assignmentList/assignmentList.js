@@ -100,7 +100,13 @@ export default class AssignmentList extends LightningElement {
     handleSearch(event){
        let filteredData = this.records.filter(rec => rec.Title__c.includes(this.searchTitle));
         this.records = filteredData;
-       this.pagination();        
+         if(this.records.length > this.pageSize){
+            this.pagination();
+           }
+            else{
+                this.assignmentData = this.records;  
+            }
+      // this.pagination();        
     }
     pagination() {
          this.assignmentData = [];
